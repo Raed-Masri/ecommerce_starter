@@ -55,7 +55,7 @@ const Footer = () => {
           </div>
         </div>
         <div class="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400">
-          <p>© 2024 ShopHub. All rights reserved.</p>
+          <p>© 2025 ShopHub. All rights reserved.</p>
         </div>
       </div>
     </footer>

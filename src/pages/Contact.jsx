@@ -65,23 +65,23 @@ const Contact = () => {
             </div>
             <div>
               <h2 class="text-2xl font-semibold mb-6">Contact Information</h2>
-              <div class="space-y-2">
-                <div class="flex items-start">
-                  <Mail size={24} color="blue" className="mx-auto" />
+              <div class="space-y-6">
+                <div class="flex items-center space-x-4">
+                  <Mail size={24} color="blue" />
                   <div>
                     <h3 class="font-medium">Email</h3>
                     <p class="text-gray-600">support@shophub.com</p>
                   </div>
                 </div>
-                <div class="flex items-start">
-                  <Phone size={24} color="blue" className="mx-auto" />
+                <div class="flex items-center space-x-4">
+                  <Phone size={24} color="blue" />
                   <div>
                     <h3 class="font-medium">Phone</h3>
                     <p class="text-gray-600">(555) 123-4567</p>
                   </div>
                 </div>
-                <div class="flex items-start">
-                  <MapPin size={24} color="blue" className="mx-auto" />
+                <div class="flex items-center space-x-4">
+                  <MapPin size={24} color="blue" />
                   <div>
                     <h3 class="font-medium">Address</h3>
                     <p class="text-gray-600">123 Shop Street City, Country</p>
