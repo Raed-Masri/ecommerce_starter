@@ -1,11 +1,8 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { Link } from "react-router-dom";
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 
-import Footer from "./Footer";
-import Navbar from "./Navbar";
-
-function Sign() {
+const SignUp = () => {
   return (
     <>
     <Navbar/>
@@ -13,7 +10,7 @@ function Sign() {
         <div class="max-w-md w-full space-y-8">
           <div>
             <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-              Sign in to your account
+              Create your account
             </h2>
           </div>
           <form class="mt-8 space-y-8">
@@ -52,20 +49,23 @@ function Sign() {
                 type="submit"
                 class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               >
-                Sign in
+                Sign up
               </button>
             </div>
           </form>
-          <div class="text-center">
-            <button class="text-blue-600 hover:text-blue-500">
-              Don't have an account? Sign up
-            </button>
+          <div className="text-center">
+            <Link
+              to="/sign-in"
+              className="text-blue-600 hover:text-blue-500 cursor-pointer"
+            >
+              Already have an account? Sign in
+            </Link>
           </div>
         </div>
       </div>
       <Footer></Footer>
     </>
-  );
+  )
 }
 
-export default Sign;
+export default SignUp

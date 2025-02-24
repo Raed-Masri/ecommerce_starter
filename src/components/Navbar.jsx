@@ -39,16 +39,16 @@ const Navbar = () => {
                   class="w-64 px-4 py-1 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <Search
-                  size={20} // Set the size of the icon
-                  color="gray" // Set the color
+                  size={20} //equivalent to w-6 h-6
+                  color="gray"
                   className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
                 />
               </div>
               <a class="text-gray-600 hover:text-gray-900" href="/favorites">
                 <Heart
-                  size={24} // Set the size of the icon (equivalent to w-6 h-6)
-                  color="currentColor" // Set the color of the icon (uses current text color)
-                  className="lucide lucide-heart" // Tailwind classes for styling
+                  size={24}
+                  color="currentColor"
+                  className="lucide lucide-heart"
                 />
               </a>
               <a
@@ -56,16 +56,16 @@ const Navbar = () => {
                 href="/cart"
               >
                 <ShoppingCart
-                  size={24} // Set the size of the icon (equivalent to w-6 h-6)
-                  color="currentColor" // Set the color of the icon (uses current text color)
-                  className="lucide lucide-shopping-cart" // Tailwind classes for styling
+                  size={24}
+                  color="currentColor"
+                  className="lucide lucide-shopping-cart"
                 />
               </a>
-              <a class="text-gray-600 hover:text-gray-900" href="/auth">
+              <a class="text-gray-600 hover:text-gray-900" href="/sign-in">
                 <User
-                  size={24} // Set the size of the icon (equivalent to w-6 h-6)
-                  color="currentColor" // Uses current text color
-                  className="lucide lucide-user" // Apply Tailwind classes for styling
+                  size={24}
+                  color="currentColor"
+                  className="lucide lucide-user"
                 />
               </a>
             </div>
