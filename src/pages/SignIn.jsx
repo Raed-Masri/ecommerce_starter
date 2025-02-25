@@ -1,8 +1,27 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import { auth } from "../lib/database";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { useState } from "react";
 
 function SignIn() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(""); // Clear any previous errors
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      alert("Signed in successfully!"); 
+      navigate("/categories"); 
+    } catch (err) {
+      setError("Invalid email or password. Please try again.");
+    }
+  };
   return (
     <>
       <Navbar />
@@ -13,7 +32,7 @@ function SignIn() {
               Sign in to your account
             </h2>
           </div>
-          <form class="mt-8 space-y-8">
+          <form class="mt-8 space-y-8" onSubmit={handleSubmit}>
             <div class="rounded-md shadow-sm -space-y-px">
               <div>
                 <label for="email-address" class="sr-only">
@@ -24,7 +43,8 @@ function SignIn() {
                   name="email"
                   type="email"
                   autocomplete="email"
-                  required=""
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
                   class="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                   placeholder="Email address"
                 />
@@ -38,13 +58,14 @@ function SignIn() {
                   name="password"
                   type="password"
                   autocomplete="current-password"
-                  required=""
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
                   class="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                   placeholder="Password"
                 />
               </div>
             </div>
-
+            {error && <p className="text-red-500 text-sm">{error}</p>}
             <div>
               <button
                 type="submit"

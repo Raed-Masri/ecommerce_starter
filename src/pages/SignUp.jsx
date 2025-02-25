@@ -1,11 +1,41 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import { useState } from "react";
+import { auth } from "../lib/database";
+
+import {
+  createUserWithEmailAndPassword,
+  fetchSignInMethodsForEmail,
+} from "firebase/auth";
 
 const SignUp = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(""); // Clear previous errors
+
+    try {
+      // Check if email is already registered
+      const methods = await fetchSignInMethodsForEmail(auth, email);
+      if (methods.length > 0) {
+        setError("This email is already in use. Try signing in instead.");
+        return;
+      }
+
+      await createUserWithEmailAndPassword(auth, email, password);
+      alert("Account created successfully!"); // Success message
+      navigate("/categories");
+    } catch (err) {
+      setError("Failed to create an account. Please try again.");
+    }
+  };
   return (
     <>
-    <Navbar/>
+      <Navbar />
       <div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-md w-full space-y-8">
           <div>
@@ -13,7 +43,7 @@ const SignUp = () => {
               Create your account
             </h2>
           </div>
-          <form class="mt-8 space-y-8">
+          <form class="mt-8 space-y-8" onSubmit={handleSubmit}>
             <div class="rounded-md shadow-sm -space-y-px">
               <div>
                 <label for="email-address" class="sr-only">
@@ -24,7 +54,8 @@ const SignUp = () => {
                   name="email"
                   type="email"
                   autocomplete="email"
-                  required=""
+                  required
+                  onChange={(e) => setEmail(e.target.value)}
                   class="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                   placeholder="Email address"
                 />
@@ -38,12 +69,14 @@ const SignUp = () => {
                   name="password"
                   type="password"
                   autocomplete="current-password"
-                  required=""
+                  required
+                  onChange={(e) => setPassword(e.target.value)}
                   class="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                   placeholder="Password"
                 />
               </div>
             </div>
+            {error && <p className="text-red-500 text-sm">{error}</p>}
             <div>
               <button
                 type="submit"
@@ -65,7 +98,7 @@ const SignUp = () => {
       </div>
       <Footer></Footer>
     </>
-  )
-}
+  );
+};
 
-export default SignUp
+export default SignUp;

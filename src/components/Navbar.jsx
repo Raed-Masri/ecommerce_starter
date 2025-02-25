@@ -1,6 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Search, Heart, ShoppingCart, User } from "lucide-react";
+import { Link } from "react-router-dom";
+import { auth } from "../lib/database";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 const Navbar = () => {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe(); // Cleanup on unmount
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      setUser(null);
+    } catch (error) {
+      console.error("Logout failed", error);
+    }
+  };
   return (
     <div>
       <nav class="bg-white shadow-md">
@@ -61,13 +81,35 @@ const Navbar = () => {
                   className="lucide lucide-shopping-cart"
                 />
               </a>
-              <a class="text-gray-600 hover:text-gray-900" href="/sign-in">
+              {/* <a class="text-gray-600 hover:text-gray-900" href="/sign-in">
                 <User
                   size={24}
                   color="currentColor"
                   className="lucide lucide-user"
                 />
-              </a>
+              </a> */}
+              {user ? (
+                <div className="flex items-center space-x-2">
+                  <span className="text-gray-700">{user.email}</span>
+                  <button
+                    onClick={handleLogout}
+                    className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
+                  >
+                    Logout
+                  </button>
+                </div>
+              ) : (
+                <Link
+                  className="text-gray-600 hover:text-gray-900"
+                  to="/sign-in"
+                >
+                  <User
+                    size={24}
+                    color="currentColor"
+                    className="lucide lucide-user"
+                  />
+                </Link>
+              )}
             </div>
           </div>
         </div>

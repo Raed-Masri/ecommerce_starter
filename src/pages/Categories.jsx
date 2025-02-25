@@ -6,10 +6,12 @@ const Categories = () => {
   return (
     <>
       <Navbar />
-
+      
       <Footer />
     </>
   );
 };
 
 export default Categories;
+
+
