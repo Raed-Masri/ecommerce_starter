@@ -10,7 +10,7 @@ const Navbar = () => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
     });
-    return () => unsubscribe(); // Cleanup on unmount
+    return () => unsubscribe(); // Cleanup
   }, []);
 
   const handleLogout = async () => {

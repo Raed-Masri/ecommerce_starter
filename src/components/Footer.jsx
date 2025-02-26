@@ -2,7 +2,7 @@ import React from "react";
 import { Twitter, Instagram, Facebook } from "lucide-react";
 const Footer = () => {
   return (
-    <footer class="bg-gray-800 text-white">
+    <footer class="bg-gray-700 text-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
@@ -42,17 +42,18 @@ const Footer = () => {
           <div>
             <h3 class="text-lg font-semibold mb-4">Follow Us</h3>
             <div class="flex space-x-4">
-              <a href="#" className="group text-gray-400 hover:text-white">
-                <Facebook size={24} className="group-hover:text-white" />
+              <a href="#" className=" text-gray-400 hover:text-white">
+                <Facebook size={24} className="hover:text-white" />
               </a>
-              <a href="#" className="group text-gray-400 hover:text-white">
-                <Twitter size={24} className="group-hover:text-white" />
+              <a href="#" className=" text-gray-400 hover:text-white">
+                <Twitter size={24} className="hover:text-white" />
               </a>
-              <a href="#" className="group text-gray-400 hover:text-white">
-                <Instagram size={24} className="group-hover:text-white" />
+              <a href="#" className=" text-gray-400 hover:text-white">
+                <Instagram size={24} className="hover:text-white" />
               </a>
             </div>
           </div>
+          
         </div>
         <div class="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400">
           <p>© 2025 ShopHub. All rights reserved.</p>
