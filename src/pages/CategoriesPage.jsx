@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Heart } from "lucide-react";
 import { categories, initialProducts } from "../lib/data";
+import ProductCard from "../components/ProductCard";
 
 const CategoriesPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -19,9 +20,12 @@ const CategoriesPage = () => {
 
   // Filter products based on selected category, search query, and price range
   const filteredProducts = initialProducts.filter((product) => {
-    const matchesCategory = selectedCategory === "All" || product.category === selectedCategory;
-    const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesPrice = 
+    const matchesCategory =
+      selectedCategory === "All" || product.category === selectedCategory;
+    const matchesSearch = product.name
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
+    const matchesPrice =
       (minPrice === "" || product.price >= parseFloat(minPrice)) &&
       (maxPrice === "" || product.price <= parseFloat(maxPrice));
     return matchesCategory && matchesSearch && matchesPrice;
@@ -99,40 +103,12 @@ const CategoriesPage = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {filteredProducts.map((product) => (
-          <div
+          <ProductCard
             key={product.id}
-            className="bg-white rounded-lg shadow-md overflow-hidden"
-          >
-            <div className="relative h-48">
-              <img
-                src={product.image_url}
-                alt={product.name}
-                className="w-full h-full object-cover"
-              />
-              <button
-                className="absolute top-2 right-2 p-2 rounded-full bg-white shadow-md hover:bg-gray-100"
-                onClick={() => toggleFavorite(product.id)}
-              >
-                <Heart
-                  className="w-5 h-5 text-gray-600"
-                  fill={favorites.includes(product.id) ? "red" : "none"}
-                  color={favorites.includes(product.id) ? "red" : "gray"}
-                />
-              </button>
-            </div>
-            <div className="p-4">
-              <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
-              <p className="text-gray-600 text-sm mb-4">{product.description}</p>
-              <div className="flex items-center justify-between">
-                <span className="text-lg font-bold">
-                  ${product.price.toFixed(2)}
-                </span>
-                <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                  Add to Cart
-                </button>
-              </div>
-            </div>
-          </div>
+            product={product}
+            toggleFavorite={toggleFavorite}
+            isFavorite={favorites.includes(product.id)}
+          />
         ))}
       </div>
     </div>
