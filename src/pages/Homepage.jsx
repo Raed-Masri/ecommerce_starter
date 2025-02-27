@@ -1,14 +1,18 @@
-import React from 'react'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
+import React from "react";
+import HeroSection from "../components/HeroSection";
+import Products from "../components/Products";
+import Categories from "../components/Categories";
 
 const Homepage = () => {
   return (
     <>
-      <Navbar/>
-      <Footer/>
+      <div class="min-h-screen flex flex-col">
+        <HeroSection />
+        <Categories/>
+        <Products />
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default Homepage
+export default Homepage;

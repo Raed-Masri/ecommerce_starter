@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import { categories, initialProducts  } from "../lib/data";
 import { useState } from "react";
 
-const Categories = () => {
+const CategoriesPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const filteredProducts =
@@ -14,15 +14,14 @@ const Categories = () => {
 
   return (
     <>
-    <Navbar/>
+ 
     <div className="p-6 max-w-4xl mx-auto">
       <h1 className="text-2xl font-bold mb-4">Product List</h1>
       <div className="mb-4">
         <select
           className="p-2 border rounded"
           value={selectedCategory}
-          onChange={(e) => setSelectedCategory(e.target.value)}
-        >
+          onChange={(e) => setSelectedCategory(e.target.value)}>
           {categories.map((category) => (
             <option key={category} value={category}>
               {category}
@@ -43,11 +42,10 @@ const Categories = () => {
         ))}
       </div>
     </div>
-    <Footer/>
     </>
   );
 };
 
-export default Categories;
+export default CategoriesPage;
 
 

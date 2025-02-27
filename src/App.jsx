@@ -5,10 +5,14 @@ import Favorites from "./pages/Favorites";
 import Contact from "./pages/Contact";
 import CartEmpty from "./pages/CartEmpty";
 import Homepage from "./pages/Homepage";
-import Categories from "./pages/Categories";
+import Categories from "./pages/CategoriesPage";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 function App() {
   return (
+    <>
+    <Navbar/>
     <Routes>
       <Route path="/" element={<Homepage />} />
       <Route path="/sign-in" element={<SignIn />} />
@@ -18,6 +22,8 @@ function App() {
       <Route path="/categories" element={<Categories />} />
       <Route path="/sign-up" element={<SignUp />} />
     </Routes>
+    <Footer/>
+    </>
   );
 }
 
