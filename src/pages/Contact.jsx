@@ -1,16 +1,33 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Phone, Mail, MapPin } from "lucide-react";
+import { sendEmail } from "../lib/emailService";
 const Contact = () => {
+  const form = useRef();
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent the default form submission
+
+    // Send the email using the utility function
+    const result = await sendEmail(form.current);
+
+    // Notify the user
+    if (result.success) {
+      alert(result.message);
+    } else {
+      alert(result.message);
+    }
+
+    // Reset the form after submission
+    e.target.reset();
+  };
   return (
     <>
-   
       <main>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <h1 class="text-4xl font-bold text-center mb-12">Contact Us</h1>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
             <div>
               <h2 class="text-2xl font-semibold mb-6">Get in Touch</h2>
-              <form class="space-y-6">
+              <form ref={form} onSubmit={handleSubmit} class="space-y-6">
                 <div>
                   <label
                     for="name"
@@ -21,6 +38,7 @@ const Contact = () => {
                   <input
                     type="text"
                     id="name"
+                    name="name"
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     required
                   />
@@ -35,6 +53,7 @@ const Contact = () => {
                   <input
                     type="email"
                     id="email"
+                    name="email"
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     required
                   />
@@ -48,6 +67,7 @@ const Contact = () => {
                   </label>
                   <textarea
                     id="message"
+                    name="message"
                     rows="4"
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     required
@@ -106,7 +126,6 @@ const Contact = () => {
           </div>
         </div>
       </main>
-   
     </>
   );
 };
