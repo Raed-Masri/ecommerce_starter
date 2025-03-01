@@ -4,21 +4,17 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../lib/database";
 import { onAuthStateChanged } from "firebase/auth";
 import { initialProducts } from "../lib/data";
+import useFavorites from "../components/useFavorite";
+import ProductCard from "../components/ProductCard";
 const Favorites = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
-  const [favorites, setFavorites] = useState(() => {
-    const storedFavorites = localStorage.getItem("favorites");
-    return storedFavorites ? JSON.parse(storedFavorites) : [];
-  });
+  const { favorites, toggleFavorite } = useFavorites();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
     });
-
-    const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    setFavorites(storedFavorites);
 
     return () => unsubscribe(); // Cleanup on unmount
   }, []);
@@ -33,7 +29,6 @@ const Favorites = () => {
 
   return (
     <>
-  
       <main className="flex-grow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           {user ? (
@@ -48,31 +43,12 @@ const Favorites = () => {
               </p>
               <div className="mt-6 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {favoriteProducts.map((product) => (
-                  <div
+                  <ProductCard
                     key={product.id}
-                    className="bg-white rounded-lg shadow-md overflow-hidden"
-                  >
-                    <div className="relative h-48">
-                      <img
-                        src={product.image_url}
-                        alt={product.name}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="p-4">
-                      <h3 className="text-lg font-semibold mb-2">
-                        {product.name}
-                      </h3>
-                      <p className="text-gray-600 text-sm mb-4">
-                        {product.description}
-                      </p>
-                      <div className="flex items-center justify-between">
-                        <span className="text-lg font-bold">
-                          ${product.price.toFixed(2)}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
+                    product={product}
+                    toggleFavorite={toggleFavorite}
+                    isFavorite={favorites.includes(product.id)}
+                  />
                 ))}
               </div>
             </div>
@@ -98,7 +74,6 @@ const Favorites = () => {
           )}
         </div>
       </main>
-    
     </>
   );
 };

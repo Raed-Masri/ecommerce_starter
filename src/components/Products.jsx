@@ -2,27 +2,16 @@ import { useState } from "react";
 import { initialProducts } from "../lib/data";
 import Title from "./UI/title";
 import ProductCard from "./ProductCard";
+import useFavorites from "./useFavorite";
 
 function Products() {
   const [visibleItems, setVisibleItems] = useState(4);
   const [showButton, setShowButton] = useState(true);
-  const [favorites, setFavorites] = useState(() => {
-    const storedFavorites = localStorage.getItem("favorites");
-    return storedFavorites ? JSON.parse(storedFavorites) : [];
-  });
-  const toggleFavorite = (productId) => {
-    let updatedFavorites;
-    if (favorites.includes(productId)) {
-      updatedFavorites = favorites.filter((id) => id !== productId);
-    } else {
-      updatedFavorites = [...favorites, productId];
-    }
-    setFavorites(updatedFavorites);
-    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-  };
+  const { favorites, toggleFavorite } = useFavorites();
+
   const buttonHandler = () => {
     setVisibleItems(initialProducts.length);
-    setShowButton(false);
+    setShowButton(false);  //hide button after its clicked
   };
   return (
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 bg-gray-50">

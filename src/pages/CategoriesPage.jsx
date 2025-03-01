@@ -17,6 +17,7 @@ const CategoriesPage = () => {
       return [];
     }
   });
+  
 
   // Filter products based on selected category, search query, and price range
   const filteredProducts = initialProducts.filter((product) => {

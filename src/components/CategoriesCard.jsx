@@ -3,7 +3,7 @@ import Title from "./UI/title";
 function Categories() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-     <Title title={"Featured Categories"} />
+      <Title title={"Featured Categories"} />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div className="relative h-64 rounded-lg overflow-hidden cursor-pointer group">
           <a href="/categories">
