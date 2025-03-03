@@ -3,8 +3,10 @@ import { Search, Heart, ShoppingCart, User } from "lucide-react";
 import { Link } from "react-router-dom";
 import { auth } from "../lib/database";
 import { onAuthStateChanged, signOut } from "firebase/auth";
+import { useCart } from "./CartContext";
 const Navbar = () => {
   const [user, setUser] = useState(null);
+  const { cart } = useCart();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -71,23 +73,22 @@ const Navbar = () => {
                   className="lucide lucide-heart"
                 />
               </a>
-              <a
-                class="text-gray-600 hover:text-gray-900 relative"
-                href="/cart"
+              <Link
+                className="text-gray-600 hover:text-gray-900 relative"
+                to="/cart"
               >
                 <ShoppingCart
                   size={24}
                   color="currentColor"
                   className="lucide lucide-shopping-cart"
                 />
-              </a>
-              {/* <a class="text-gray-600 hover:text-gray-900" href="/sign-in">
-                <User
-                  size={24}
-                  color="currentColor"
-                  className="lucide lucide-user"
-                />
-              </a> */}
+                {cart.length > 0 && (
+                  <span className="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full px-1">
+                    {cart.length}
+                  </span>
+                )}
+              </Link>
+              
               {user ? (
                 <div className="flex items-center space-x-2">
                   <span className="text-gray-700">{user.email}</span>

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Heart } from "lucide-react";
 import { categories, initialProducts } from "../lib/data";
 import ProductCard from "../components/ProductCard";
 

@@ -1,6 +1,8 @@
 import React from "react";
 import { Heart } from "lucide-react";
+import { useCart } from "./CartContext";
 const ProductCard = ({ product, toggleFavorite, isFavorite }) => {
+  const { addToCart } = useCart();
   return (
     <div
       key={product.id}
@@ -29,7 +31,8 @@ const ProductCard = ({ product, toggleFavorite, isFavorite }) => {
         <p className="text-gray-600 text-sm mb-4">{product.description}</p>
         <div className="flex items-center justify-between">
           <span className="text-lg font-bold">${product.price.toFixed(2)}</span>
-          <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+          <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          onClick={() => addToCart(product)}>
             Add to Cart
           </button>
         </div>
