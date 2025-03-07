@@ -8,8 +8,8 @@ import Homepage from "./pages/Homepage";
 import Categories from "./pages/CategoriesPage";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import { CartProvider } from "./components/CartContext"; // Import the CartProvider
-import CartPage from "./pages/CartPage"; // Import the CartPage
+import { CartProvider } from "./components/CartContext"; 
+import CartPage from "./pages/CartPage"; 
 
 function App() {
   return (

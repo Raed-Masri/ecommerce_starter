@@ -1,4 +1,3 @@
-import React from "react";
 import HeroSection from "../components/HeroSection";
 import Products from "../components/Products";
 import Categories from "../components/CategoriesCard";
@@ -6,9 +5,9 @@ import Categories from "../components/CategoriesCard";
 const Homepage = () => {
   return (
     <>
-      <div class="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col">
         <HeroSection />
-        <Categories/>
+        <Categories />
         <Products />
       </div>
     </>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { categories, initialProducts } from "../lib/data";
 import ProductCard from "../components/ProductCard";
 

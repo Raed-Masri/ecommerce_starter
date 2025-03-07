@@ -18,7 +18,7 @@ function Categories() {
           </a>
         </div>
 
-        <div class="relative h-64 rounded-lg overflow-hidden cursor-pointer group">
+        <div className="relative h-64 rounded-lg overflow-hidden cursor-pointer group">
           <a href="/categories">
             <img
               src="https://images.unsplash.com/photo-1445205170230-053b83016050"

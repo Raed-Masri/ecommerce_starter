@@ -1,4 +1,3 @@
-// useFavorites.js
 import { useState } from "react";
 
 const useFavorites = () => {
